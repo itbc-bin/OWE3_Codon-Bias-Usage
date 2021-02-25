@@ -1,3 +1,6 @@
+import regex as re
+
+
 def extract_data(file):
     """Reads Fasta file, saves the header and sequence
     for every gene in a list
@@ -5,13 +8,19 @@ def extract_data(file):
     return: genes - 2d list
     """
     genes = []
-    headers = []
-    seq = []
+    seq = ""
     with open(file) as data:
         for line in data:
-            if ">" in line:
-                headers.append(line)
-            else
+            if re.search("^>", line):
+                if seq != "":
+                    genes.append([header, seq])
+                    seq = ""
+                header = line.replace("\n", "")
+            else:
+                seq += line.replace("\n", "")
+        genes.append([header, seq])
+
+    return genes
 
 
 def define_groups():
@@ -56,12 +65,18 @@ def calc_bias():
     """
 
 
-def calc_usage():
+def calc_usage(seq, codons):
+    """Calculates What codons are used in the sequence and what
+
+    return: Values
     """
 
-    return:
-    """
+    for header, sequence in seq:
+        for codon in range(0, len(sequence), 3):
+            print(sequence[codon:codon + 3])
 
+
+    return ""
 
 def make_graph():
     """
@@ -71,5 +86,7 @@ def make_graph():
 
 
 if __name__ == '__main__':
-    file = "file_name"
-    extract_data(file)
+    Aconitate_genes = "sequenties.txt"
+    genes_four_organisms = extract_data(Aconitate_genes)
+    codons = codons()
+    usage_value = calc_usage(genes_four_organisms, codons)
