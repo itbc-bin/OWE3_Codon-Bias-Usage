@@ -2,8 +2,16 @@ def extract_data(file):
     """Reads Fasta file, saves the header and sequence
     for every gene in a list
 
-    return: Gene_seq - list
+    return: genes - 2d list
     """
+    genes = []
+    headers = []
+    seq = []
+    with open(file) as data:
+        for line in data:
+            if ">" in line:
+                headers.append(line)
+            else
 
 
 def define_groups():
