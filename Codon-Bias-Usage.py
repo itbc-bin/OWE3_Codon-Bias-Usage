@@ -54,7 +54,14 @@ def codons():
                   'gta': 'V', 'gca': 'A', 'gaa': 'E', 'gga': 'G',
                   'gtg': 'V', 'gcg': 'A', 'gag': 'E', 'ggg': 'G',
                   }
+    return codon_dict
 
+
+def count():
+    """
+
+    :return:
+    """
     codon_code_count = dict(ttt=0, tct=0, tat=0, tgt=0, ttc=0, tcc=0,
                             tac=0, tgc=0, tta=0, tca=0, taa=0, tga=0,
                             ttg=0, tcg=0, tag=0, tgg=0, ctt=0, cct=0,
@@ -73,7 +80,7 @@ def codons():
                             W=0, R=0, G=0,
                             )
 
-    return codon_dict, codon_code_count, amino_acid_count
+    return codon_code_count, amino_acid_count
 
 
 def calc_bias():
@@ -89,17 +96,38 @@ def calc_usage(seq):
     return: Values
     """
 
+    codon_dict = codons()
     for header, sequence in seq:
-        codon_dict, codon_code_count, amino_acid_count = codons()
+        header = header[:header.find(" ")]
+        header = header.replace(">", "")
+        header = header.replace(":", "_")
+        codon_code_count, amino_acid_count = count()
         for position in range(0, len(sequence), 3):
             codon = sequence[position:position + 3]
             codon_code_count[codon] += 1
             amino_acid_count[codon_dict[codon]] += 1
-            print(codon_dict[codon])
-        print(amino_acid_count)
-        print(codon_code_count)
 
-    return ""
+        globals()[header] = amino_acid_count, codon_code_count
+    hsa_48_percent = []
+    rcn_112186046_percent = []
+    aasc_A4S02_13295_percent = []
+    acij_JS278_01766_percent = []
+    for codon in codon_dict:
+        percent = round(hsa_48[1][codon] / hsa_48[0][codon_dict[codon]] * 100, 2)
+        hsa_48_percent += [[codon, percent]]
+        percent = round(rcn_112186046[1][codon] / rcn_112186046[0][codon_dict[codon]] * 100, 2)
+        rcn_112186046_percent += [[codon, percent]]
+        percent = round(aasc_A4S02_13295[1][codon] / aasc_A4S02_13295[0][codon_dict[codon]] * 100, 2)
+        aasc_A4S02_13295_percent += [[codon, percent]]
+        percent = round(acij_JS278_01766[1][codon] / acij_JS278_01766[0][codon_dict[codon]] * 100, 2)
+        acij_JS278_01766_percent += [[codon, percent]]
+    print(hsa_48_percent)
+    print(rcn_112186046_percent)
+    print(aasc_A4S02_13295_percent)
+    print(acij_JS278_01766_percent)
+
+    return hsa_48_percent, rcn_112186046_percent, \
+           aasc_A4S02_13295_percent, acij_JS278_01766_percent
 
 
 def make_graph():
