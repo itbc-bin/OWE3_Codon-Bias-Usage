@@ -13,23 +13,52 @@ def extract_data(file):
         for line in data:
             if re.search("^>", line):
                 if seq != "":
+                    seq = seq.lower()
                     genes.append([header, seq])
                     seq = ""
                 header = line.replace("\n", "")
             else:
                 seq += line.replace("\n", "")
+        seq = seq.lower()
         genes.append([header, seq])
 
     return genes
 
 
-def define_groups():
+def process(virus):
+    """
+
+    :return:
+    """
+    virus_data = extract_data(virus)
+    virus_groups = define_groups(virus_data)
+    virus_bias = calc_bias(virus_groups)
+
+    return virus_bias
+
+def define_groups(virus):
     """Divides the genes into two groups, one for surface proteins
     and the other for internal proteins
 
     return: surface_gene - list
     return: internal_gene - list
     """
+    group_internal = []
+    group_envelop = []
+    for gene in virus:
+        for line in gene:
+            if re.search(">", line):
+                header = line.split(" ")
+                for attribute in header:
+                    attribute = attribute.lower()
+                    if "protein=" in attribute \
+                            and "env" in attribute:
+                        group_envelop.append(gene)
+                    elif "protein=" in attribute \
+                            and "env" not in attribute:
+                        group_internal.append(gene)
+
+    return group_envelop, group_internal
 
 
 def codons():
@@ -83,22 +112,44 @@ def count():
     return codon_code_count, amino_acid_count
 
 
-def calc_bias():
+def calc_bias(groups):
     """
 
     return:
     """
+    codon_bias_percent = []
+    codon_dict = codons()
+    all_percent = []
+    codon_code_count, amino_acid_count = count()
+    for group in groups:
+        for header, sequence in group:
+            for position in range(0, len(sequence), 3):
+                codon = sequence[position:position + 3]
+                codon_code_count[codon] += 1
+                amino_acid_count[codon_dict[codon]] += 1
+    for codon in codon_dict:
+        try:
+            percent = round(codon_code_count[codon] /
+                            amino_acid_count[codon_dict[codon]]
+                            * 100, 2)
+        except ZeroDivisionError:
+            percent = "amino acid " + codon_dict[codon] +\
+                    " is not used in sequence"
+        all_percent += [codon, percent]
+    codon_bias_percent += all_percent
 
+    return codon_bias_percent
 
 def calc_usage(seq):
     """Calculates What codons are used in the sequence and what
 
     return: Values
     """
-
+    codon_usage_percent = []
     codon_dict = codons()
+    codon_percentages = []
     for header, sequence in seq:
-        header = header[:header.find(" ")]
+        header = header[:header.find(" " or "_")]
         header = header.replace(">", "")
         header = header.replace(":", "_")
         codon_code_count, amino_acid_count = count()
@@ -106,28 +157,19 @@ def calc_usage(seq):
             codon = sequence[position:position + 3]
             codon_code_count[codon] += 1
             amino_acid_count[codon_dict[codon]] += 1
+        globals()[header] = []
+        for codon in codon_dict:
+            try:
+                percent = round(codon_code_count[codon] /
+                                amino_acid_count[codon_dict[codon]]
+                                * 100, 2)
+            except ZeroDivisionError:
+                percent = "amino acid", codon_dict[codon], \
+                          "is not used in sequence"
+            codon_percentages += [[codon, percent]]
+        codon_usage_percent += header, globals()[header]
 
-        globals()[header] = amino_acid_count, codon_code_count
-    hsa_48_percent = []
-    rcn_112186046_percent = []
-    aasc_A4S02_13295_percent = []
-    acij_JS278_01766_percent = []
-    for codon in codon_dict:
-        percent = round(hsa_48[1][codon] / hsa_48[0][codon_dict[codon]] * 100, 2)
-        hsa_48_percent += [[codon, percent]]
-        percent = round(rcn_112186046[1][codon] / rcn_112186046[0][codon_dict[codon]] * 100, 2)
-        rcn_112186046_percent += [[codon, percent]]
-        percent = round(aasc_A4S02_13295[1][codon] / aasc_A4S02_13295[0][codon_dict[codon]] * 100, 2)
-        aasc_A4S02_13295_percent += [[codon, percent]]
-        percent = round(acij_JS278_01766[1][codon] / acij_JS278_01766[0][codon_dict[codon]] * 100, 2)
-        acij_JS278_01766_percent += [[codon, percent]]
-    print(hsa_48_percent)
-    print(rcn_112186046_percent)
-    print(aasc_A4S02_13295_percent)
-    print(acij_JS278_01766_percent)
-
-    return hsa_48_percent, rcn_112186046_percent, \
-           aasc_A4S02_13295_percent, acij_JS278_01766_percent
+    return codon_usage_percent
 
 
 def make_graph():
@@ -139,5 +181,15 @@ def make_graph():
 
 if __name__ == '__main__':
     Aconitate_genes = "sequenties.txt"
+    hiv1 = "nucleo_hiv_1.txt"
+    hiv2 = "nucleo_hiv_2.txt"
+    siv1 = "nucleo_siv.txt"
+    siv2 = "nucleo_sivmnd2.txt"
+
+    hiv1_bias = process(hiv1)
+    hiv2_bias = process(hiv2)
+    siv1_bias = process(siv1)
+    siv2_bias = process(siv2)
+
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
