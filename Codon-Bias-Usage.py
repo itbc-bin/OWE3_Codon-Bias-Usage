@@ -25,7 +25,7 @@ def extract_data(file):
     return genes
 
 
-def process(virus):
+def bias_process(virus):
     """
 
     :return:
@@ -35,6 +35,14 @@ def process(virus):
     virus_bias = calc_bias(virus_groups)
 
     return virus_bias
+
+
+def usage_procces():
+    """
+
+    :return:
+    """
+
 
 def define_groups(virus):
     """Divides the genes into two groups, one for surface proteins
@@ -134,11 +142,12 @@ def calc_bias(groups):
                             * 100, 2)
         except ZeroDivisionError:
             percent = "amino acid " + codon_dict[codon] +\
-                    " is not used in sequence"
+                      " is not used in this sequence"
         all_percent += [codon, percent]
     codon_bias_percent += all_percent
 
     return codon_bias_percent
+
 
 def calc_usage(seq):
     """Calculates What codons are used in the sequence and what
