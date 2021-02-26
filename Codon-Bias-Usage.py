@@ -195,10 +195,10 @@ if __name__ == '__main__':
     siv1 = "nucleo_siv.txt"
     siv2 = "nucleo_sivmnd2.txt"
 
-    hiv1_bias = process(hiv1)
-    hiv2_bias = process(hiv2)
-    siv1_bias = process(siv1)
-    siv2_bias = process(siv2)
+    hiv1_bias = bias_process(hiv1)
+    hiv2_bias = bias_process(hiv2)
+    siv1_bias = bias_process(siv1)
+    siv2_bias = bias_process(siv2)
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
