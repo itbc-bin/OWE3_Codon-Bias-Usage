@@ -25,7 +25,7 @@ def extract_data(file):
     return genes
 
 
-def bias_process(virus):
+def process(virus):
     """
 
     :return:
@@ -33,15 +33,12 @@ def bias_process(virus):
     virus_data = extract_data(virus)
     virus_groups = define_groups(virus_data)
     virus_bias = calc_bias(virus_groups)
+    virus_env_usage = calc_usage(virus_groups[0])
+    virus_internal_usage = calc_usage(virus_groups[1])
+    virus_usage = [virus_env_usage, virus_internal_usage]
+    print(virus_internal_usage)
 
-    return virus_bias
-
-
-def usage_procces():
-    """
-
-    :return:
-    """
+    return virus_bias, virus_usage
 
 
 def define_groups(virus):
@@ -149,7 +146,7 @@ def calc_bias(groups):
     return codon_bias_percent
 
 
-def calc_usage(seq):
+def calc_usage(seq_group):
     """Calculates What codons are used in the sequence and what
 
     return: Values
@@ -157,16 +154,16 @@ def calc_usage(seq):
     codon_usage_percent = []
     codon_dict = codons()
     codon_percentages = []
-    for header, sequence in seq:
+    for header, sequence in seq_group:
         header = header[:header.find(" " or "_")]
         header = header.replace(">", "")
         header = header.replace(":", "_")
+        header = header[:15]
         codon_code_count, amino_acid_count = count()
         for position in range(0, len(sequence), 3):
             codon = sequence[position:position + 3]
             codon_code_count[codon] += 1
             amino_acid_count[codon_dict[codon]] += 1
-        globals()[header] = []
         for codon in codon_dict:
             try:
                 percent = round(codon_code_count[codon] /
@@ -176,7 +173,7 @@ def calc_usage(seq):
                 percent = "amino acid", codon_dict[codon], \
                           "is not used in sequence"
             codon_percentages += [[codon, percent]]
-        codon_usage_percent += header, globals()[header]
+        codon_usage_percent += header, codon_percentages
 
     return codon_usage_percent
 
@@ -195,10 +192,10 @@ if __name__ == '__main__':
     siv1 = "nucleo_siv.txt"
     siv2 = "nucleo_sivmnd2.txt"
 
-    hiv1_bias = bias_process(hiv1)
-    hiv2_bias = bias_process(hiv2)
-    siv1_bias = bias_process(siv1)
-    siv2_bias = bias_process(siv2)
+    hiv1_bias, hiv1_usage = process(hiv1)
+    # hiv2_bias, hiv2_usage = process(hiv2)
+    # siv1_bias, siv1_usage = process(siv1)
+    # siv2_bias, siv2_usage = process(siv2)
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
