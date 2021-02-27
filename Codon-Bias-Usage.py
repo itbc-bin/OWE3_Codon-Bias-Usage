@@ -1,4 +1,5 @@
 import regex as re
+import matplotlib.pyplot as plt
 
 
 def extract_data(file):
@@ -36,6 +37,7 @@ def process(virus):
     virus_env_usage = calc_usage(virus_groups[0])
     virus_internal_usage = calc_usage(virus_groups[1])
     virus_usage = [virus_env_usage, virus_internal_usage]
+    #print(virus_internal_usage)
 
     return virus_bias, virus_usage
 
@@ -142,7 +144,6 @@ def calc_bias(groups):
         all_percent += [codon, percent]
     codon_bias_percent += all_percent
 
-
     return codon_bias_percent
 
 
@@ -174,15 +175,108 @@ def calc_usage(seq_group):
                           "is not used in sequence"
             codon_percentages += [[codon, percent]]
         codon_usage_percent += header, codon_percentages
-
+    #print(codon_usage_percent)
     return codon_usage_percent
 
 
-def make_graph():
+def lijsten_organismen(usage_value):
+    #print(usage_value)
+    hsa = usage_value[1]
+    #print(hsa)
+    codon = []
+    hsa_percentage = []
+    rcn_percentage = []
+    aasc_percentage = []
+    acij_percentage = []
+    for line in hsa:
+        hsa_percentage.append(line[1])
+        codon.append(line[0])
+    print(hsa_percentage)
+    rcn = usage_value[3]
+    for line in rcn:
+        rcn_percentage.append(line[1])
+
+    aasc = usage_value[5]
+    for line in aasc:
+        aasc_percentage.append(line[1])
+
+    acij = usage_value[7]
+    for line in acij:
+        acij_percentage.append(line[1])
+
+
+    return codon, hsa_percentage, rcn_percentage, \
+           aasc_percentage, acij_percentage
+
+
+def make_graph_hsa(codon, hsa_percentage,codon_dict):
     """
 
     return:
     """
+
+    plt.bar(codon, hsa_percentage, color = "darkgreen")
+    plt.ylabel("percentage(%)")
+    plt.xlabel("codons")
+    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.title("hsa")
+
+    #labels = list(codon_dict.values())
+    #handles = [plt.Rectangle((0, 0), 1, 1)]
+    #plt.legend(handles, labels)
+    plt.show()
+
+def make_graph_rcn(codon, rcn_percentage,codon_dict):
+    """
+
+    return:
+    """
+    plt.bar(codon, rcn_percentage, color = "maroon")
+    plt.ylabel("percentage(%)")
+    plt.xlabel("codons")
+    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.title("rcn")
+
+    labels = list(codon_dict.values())
+    handles = [plt.Rectangle((0, 0), 1, 1)]
+    plt.legend(handles, labels)
+    plt.show()
+
+def make_graph_aasc(codon, aasc_percentage,codon_dict):
+    """
+
+    return:
+    """
+
+    plt.bar(codon, aasc_percentage, color = "midnightblue")
+    plt.ylabel("percentage(%)")
+    plt.xlabel("codons")
+    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.title("aasc")
+
+    labels = list(codon_dict.values())
+    handles = [plt.Rectangle((0, 0), 1, 1)]
+    plt.legend(handles, labels)
+    plt.show()
+
+def make_graph_acij(codon, acij_percentage,codon_dict):
+    """
+
+    return:
+    """
+
+    plt.bar(codon, acij_percentage, color = "darkslategrey")
+    plt.ylabel("percentage(%)")
+    plt.xlabel("codons")
+    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.title("acij")
+
+    labels = list(codon_dict.values())
+    handles = [plt.Rectangle((0, 0), 1, 1, color = "darkslategrey")]
+    plt.legend(handles, labels)
+    plt.show()
+
+
 
 
 if __name__ == '__main__':
@@ -199,4 +293,13 @@ if __name__ == '__main__':
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
+    codon, hsa_percentage, rcn_percentage, \
+           aasc_percentage, acij_percentage = lijsten_organismen(usage_value)
+    codon_dict = codons()
+
+    make_graph_hsa(codon, hsa_percentage, codon_dict)
+    make_graph_rcn(codon, rcn_percentage, codon_dict)
+    make_graph_aasc(codon, aasc_percentage, codon_dict)
+    make_graph_acij(codon, acij_percentage, codon_dict)
+
 
