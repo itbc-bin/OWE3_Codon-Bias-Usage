@@ -25,6 +25,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration name="Codon-Bias-Usage" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -65,38 +66,42 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1041" y="381" key="#Inspections/0.0.2560.1400@0.0.2560.1400" timestamp="1614254981638" />
-    <state width="1399" height="398" key="GridCell.Tab.0.bottom" timestamp="1614364260299">
+    <state width="2539" height="400" key="GridCell.Tab.0.bottom" timestamp="1614432322320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="398" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1614364260299" />
-    <state width="1399" height="398" key="GridCell.Tab.0.center" timestamp="1614364260299">
+    <state width="2539" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1614432322320" />
+    <state width="2539" height="400" key="GridCell.Tab.0.center" timestamp="1614432322320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="398" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1614364260299" />
-    <state width="1399" height="398" key="GridCell.Tab.0.left" timestamp="1614364260299">
+    <state width="2539" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1614432322320" />
+    <state width="2539" height="400" key="GridCell.Tab.0.left" timestamp="1614432322320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="398" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1614364260299" />
-    <state width="1399" height="398" key="GridCell.Tab.0.right" timestamp="1614364260299">
+    <state width="2539" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1614432322320" />
+    <state width="2539" height="400" key="GridCell.Tab.0.right" timestamp="1614432322320">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="398" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1614364260299" />
-    <state width="1399" height="488" key="GridCell.Tab.1.bottom" timestamp="1614364131666">
+    <state width="2539" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1614432322320" />
+    <state width="1399" height="488" key="GridCell.Tab.1.bottom" timestamp="1614364633424">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="488" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1614364131666" />
-    <state width="1399" height="488" key="GridCell.Tab.1.center" timestamp="1614364131666">
+    <state width="1399" height="488" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1614364633424" />
+    <state width="1399" height="488" key="GridCell.Tab.1.center" timestamp="1614364633424">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="488" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1614364131666" />
-    <state width="1399" height="488" key="GridCell.Tab.1.left" timestamp="1614364131666">
+    <state width="1399" height="488" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1614364633424" />
+    <state width="1399" height="488" key="GridCell.Tab.1.left" timestamp="1614364633424">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="488" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1614364131666" />
-    <state width="1399" height="488" key="GridCell.Tab.1.right" timestamp="1614364131666">
+    <state width="1399" height="488" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1614364633424" />
+    <state width="1399" height="488" key="GridCell.Tab.1.right" timestamp="1614364633424">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1399" height="488" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1614364131666" />
+    <state width="1399" height="488" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1614364633424" />
+    <state x="377" y="0" key="SettingsEditor" timestamp="1614432027084">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="377" y="0" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1614432027084" />
     <state width="610" height="700" key="XDebugger.FullValuePopup" timestamp="1614363864505">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

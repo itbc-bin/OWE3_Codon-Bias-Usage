@@ -36,7 +36,6 @@ def process(virus):
     virus_env_usage = calc_usage(virus_groups[0])
     virus_internal_usage = calc_usage(virus_groups[1])
     virus_usage = [virus_env_usage, virus_internal_usage]
-    print(virus_internal_usage)
 
     return virus_bias, virus_usage
 
@@ -143,6 +142,7 @@ def calc_bias(groups):
         all_percent += [codon, percent]
     codon_bias_percent += all_percent
 
+
     return codon_bias_percent
 
 
@@ -199,3 +199,4 @@ if __name__ == '__main__':
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
+
