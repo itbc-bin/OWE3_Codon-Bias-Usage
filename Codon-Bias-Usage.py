@@ -214,11 +214,11 @@ def make_graph_hsa(codon, hsa_percentage,codon_dict):
 
     return:
     """
-
-    plt.bar(codon, hsa_percentage, color = "darkgreen")
+    plt.figure(num=1, figsize=(15, 10))
+    plt.bar(codon, hsa_percentage, color="darkgreen")
     plt.ylabel("percentage(%)")
     plt.xlabel("codons")
-    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.xticks(rotation=90, fontsize=12)
     plt.title("hsa")
 
     #labels = list(codon_dict.values())
@@ -231,11 +231,13 @@ def make_graph_rcn(codon, rcn_percentage,codon_dict):
 
     return:
     """
-    plt.bar(codon, rcn_percentage, color = "maroon")
+    plt.figure(num=1, figsize=(15, 10))
+    plt.bar(codon, rcn_percentage, color="maroon")
     plt.ylabel("percentage(%)")
     plt.xlabel("codons")
-    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.xticks(rotation=90, fontsize=12)
     plt.title("rcn")
+
 
     labels = list(codon_dict.values())
     handles = [plt.Rectangle((0, 0), 1, 1)]
@@ -247,11 +249,11 @@ def make_graph_aasc(codon, aasc_percentage,codon_dict):
 
     return:
     """
-
-    plt.bar(codon, aasc_percentage, color = "midnightblue")
+    plt.figure(num=1, figsize=(15, 10))
+    plt.bar(codon, aasc_percentage, color="midnightblue")
     plt.ylabel("percentage(%)")
     plt.xlabel("codons")
-    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.xticks(rotation=90, fontsize=12)
     plt.title("aasc")
 
     labels = list(codon_dict.values())
@@ -264,15 +266,15 @@ def make_graph_acij(codon, acij_percentage,codon_dict):
 
     return:
     """
-
-    plt.bar(codon, acij_percentage, color = "darkslategrey")
+    plt.figure(num=1, figsize=(15, 10))
+    plt.bar(codon, acij_percentage, color="darkslategrey")
     plt.ylabel("percentage(%)")
     plt.xlabel("codons")
-    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.xticks(rotation=90, fontsize=12)
     plt.title("acij")
 
     labels = list(codon_dict.values())
-    handles = [plt.Rectangle((0, 0), 1, 1, color = "darkslategrey")]
+    handles = [plt.Rectangle((0, 0), 1, 1, color="darkslategrey")]
     plt.legend(handles, labels)
     plt.show()
 
