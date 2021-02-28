@@ -311,7 +311,7 @@ def make_graph_hiv1u1(hiv1_usage_1_codon, hiv1_usage_1_percentage, codon_dict):
     plt.bar(hiv1_usage_1_codon, hiv1_usage_1_percentage, color = "pink")
     plt.ylabel("percentage(%)")
     plt.xlabel("codons")
-    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.xticks(rotation = 90, fontsize = 12)
     plt.title("hiv1 usage 1")
 
     labels = list(codon_dict.values())
