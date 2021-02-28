@@ -154,8 +154,9 @@ def calc_usage(seq_group):
     """
     codon_usage_percent = []
     codon_dict = codons()
-    codon_percentages = []
+
     for header, sequence in seq_group:
+        codon_percentages = []
         header = header[:header.find(" " or "_")]
         header = header.replace(">", "")
         header = header.replace(":", "_")
@@ -295,6 +296,7 @@ if __name__ == '__main__':
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
+    print(usage_value)
     codon, hsa_percentage, rcn_percentage, \
            aasc_percentage, acij_percentage = lijsten_organismen(usage_value)
 
