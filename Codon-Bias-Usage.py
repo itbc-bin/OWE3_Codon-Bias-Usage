@@ -204,12 +204,11 @@ def lijsten_organismen(usage_value):
     for line in acij:
         acij_percentage.append(line[1])
 
-
     return codon, hsa_percentage, rcn_percentage, \
            aasc_percentage, acij_percentage
 
 
-def make_graph_hsa(codon, hsa_percentage,codon_dict):
+def make_graph_hsa(codon, hsa_percentage, codon_dict):
     """
 
     return:
@@ -226,6 +225,7 @@ def make_graph_hsa(codon, hsa_percentage,codon_dict):
     #plt.legend(handles, labels)
     plt.show()
 
+
 def make_graph_rcn(codon, rcn_percentage,codon_dict):
     """
 
@@ -238,13 +238,13 @@ def make_graph_rcn(codon, rcn_percentage,codon_dict):
     plt.xticks(rotation=90, fontsize=12)
     plt.title("rcn")
 
-
     labels = list(codon_dict.values())
     handles = [plt.Rectangle((0, 0), 1, 1)]
     plt.legend(handles, labels)
     plt.show()
 
-def make_graph_aasc(codon, aasc_percentage,codon_dict):
+
+def make_graph_aasc(codon, aasc_percentage, codon_dict):
     """
 
     return:
@@ -260,6 +260,7 @@ def make_graph_aasc(codon, aasc_percentage,codon_dict):
     handles = [plt.Rectangle((0, 0), 1, 1)]
     plt.legend(handles, labels)
     plt.show()
+
 
 def make_graph_acij(codon, acij_percentage,codon_dict):
     """
@@ -279,14 +280,13 @@ def make_graph_acij(codon, acij_percentage,codon_dict):
     plt.show()
 
 
-
-
 if __name__ == '__main__':
     Aconitate_genes = "sequenties.txt"
     hiv1 = "nucleo_hiv_1.txt"
     hiv2 = "nucleo_hiv_2.txt"
     siv1 = "nucleo_siv.txt"
     siv2 = "nucleo_sivmnd2.txt"
+    codon_dict = codons()
 
     hiv1_bias, hiv1_usage = process(hiv1)
     # hiv2_bias, hiv2_usage = process(hiv2)
@@ -297,7 +297,6 @@ if __name__ == '__main__':
     usage_value = calc_usage(genes_four_organisms)
     codon, hsa_percentage, rcn_percentage, \
            aasc_percentage, acij_percentage = lijsten_organismen(usage_value)
-    codon_dict = codons()
 
     make_graph_hsa(codon, hsa_percentage, codon_dict)
     make_graph_rcn(codon, rcn_percentage, codon_dict)
