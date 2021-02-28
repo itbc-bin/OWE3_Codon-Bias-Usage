@@ -208,6 +208,28 @@ def lijsten_organismen(usage_value):
     return codon, hsa_percentage, rcn_percentage, \
            aasc_percentage, acij_percentage
 
+def lijsten_hiv1(hiv1_usage, hiv1_bias):
+    hiv1_usage_1 = hiv1_usage[0]
+    hiv1_usage_1 = hiv1_usage_1[1]
+
+    hiv1_usage_2 = hiv1_usage[1]
+    hiv1_usage_2 = hiv1_usage_2[1]
+
+    hiv1_usage_1_percentage = []
+    hiv1_usage_1_codon = []
+    hiv1_usage_2_percentage = []
+    hiv1_usage_2_codon = []
+
+    for line in hiv1_usage_1:
+        hiv1_usage_1_percentage.append(line[1])
+        hiv1_usage_1_codon.append(line[0])
+
+    for line in hiv1_usage_2:
+        hiv1_usage_2_percentage.append(line[1])
+        hiv1_usage_2_codon.append(line[0])
+
+    return hiv1_usage_1_codon, hiv1_usage_1_percentage, hiv1_usage_2_codon, hiv1_usage_2_percentage
+
 
 def make_graph_hsa(codon, hsa_percentage, codon_dict):
     """
@@ -280,6 +302,22 @@ def make_graph_acij(codon, acij_percentage,codon_dict):
     plt.legend(handles, labels)
     plt.show()
 
+def make_graph_hiv1u1(hiv1_usage_1_codon, hiv1_usage_1_percentage, codon_dict):
+    """
+
+    return:
+    """
+    plt.figure(num=1, figsize=(15, 10))
+    plt.bar(hiv1_usage_1_codon, hiv1_usage_1_percentage, color = "pink")
+    plt.ylabel("percentage(%)")
+    plt.xlabel("codons")
+    plt.xticks(rotation = 90, fontsize = 5.25)
+    plt.title("hiv1 usage 1")
+
+    labels = list(codon_dict.values())
+    handles = [plt.Rectangle((0, 0), 1, 1, color = "darkslategrey")]
+    plt.legend(handles, labels)
+    plt.show()
 
 if __name__ == '__main__':
     Aconitate_genes = "sequenties.txt"
@@ -300,9 +338,12 @@ if __name__ == '__main__':
     codon, hsa_percentage, rcn_percentage, \
            aasc_percentage, acij_percentage = lijsten_organismen(usage_value)
 
+    hiv1_usage_1_codon, hiv1_usage_1_percentage, hiv1_usage_2_codon, hiv1_usage_2_percentage = lijsten_hiv1(hiv1_usage,
+                                                                                                            hiv1_bias)
+
     make_graph_hsa(codon, hsa_percentage, codon_dict)
     make_graph_rcn(codon, rcn_percentage, codon_dict)
     make_graph_aasc(codon, aasc_percentage, codon_dict)
     make_graph_acij(codon, acij_percentage, codon_dict)
-
+    make_graph_hiv1u1(hiv1_usage_1_codon, hiv1_usage_1_percentage, codon_dict)
 
