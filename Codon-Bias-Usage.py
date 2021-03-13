@@ -328,9 +328,9 @@ if __name__ == '__main__':
     codon_dict = codons()
 
     hiv1_bias, hiv1_usage = process(hiv1)
-    # hiv2_bias, hiv2_usage = process(hiv2)
-    # siv1_bias, siv1_usage = process(siv1)
-    # siv2_bias, siv2_usage = process(siv2)
+    hiv2_bias, hiv2_usage = process(hiv2)
+    siv1_bias, siv1_usage = process(siv1)
+    siv2_bias, siv2_usage = process(siv2)
 
     genes_four_organisms = extract_data(Aconitate_genes)
     usage_value = calc_usage(genes_four_organisms)
